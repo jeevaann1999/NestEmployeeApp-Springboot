@@ -17,7 +17,6 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeDao dao;
-
     @CrossOrigin(origins = "*")
     @PostMapping(path = "/addemp",consumes = "application/json" ,produces = "application/json")
     public Map<String,String> AddEmploy(@RequestBody Employee e)
