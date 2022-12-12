@@ -4,12 +4,10 @@ package com.example.nestemployeeapp_backend.controller;
 import com.example.nestemployeeapp_backend.dao.TaskDao;
 import com.example.nestemployeeapp_backend.model.Task;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -30,6 +28,22 @@ public class TaskController {
         map.put("status","success");
         return map;
     }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping(path = "/viewall")
+    public List<Map<String,String>> ViewAllTask()
+    {
+        return (List<Map<String, String>>) dao.ViewAllTask();
+    }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/empview",consumes = "application/json",produces = "application/json")
+    public List<Task> EmployViewTask(@RequestBody Task t)
+    {
+
+        return (List<Task>) dao.EmployViewTask(t.getEmpcode());
+    }
+
 
 
 }
